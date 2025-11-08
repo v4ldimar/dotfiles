@@ -1,0 +1,7 @@
+[user]
+	name = valdimar
+	email = valdimar@retric.is 
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
