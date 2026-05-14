@@ -1,6 +1,6 @@
 [github]
 	user = v4ldimar
 [core]
-	editor = vim
+	editor = nvim
 [init]
 	defaultBranch = main

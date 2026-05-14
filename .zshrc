@@ -1,3 +1,50 @@
+# Homebrew
+if ! command -v brew >/dev/null 2>&1; then
+  echo "==> Installing Homebrew"
+  NONINTERACTIVE=1 /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Brew packages
+for _pkg in git neovim nvm; do
+  brew list --formula "$_pkg" >/dev/null 2>&1 || brew install "$_pkg"
+done
+brew list --formula powerlevel10k >/dev/null 2>&1 || brew install powerlevel10k
+unset _pkg
+
+# Oh My Zsh
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "==> Installing Oh My Zsh"
+  RUNZSH=no KEEP_ZSHRC=yes CHSH=no \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+# OMZ custom plugins + powerlevel10k theme link
+_zc="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+[[ -d "$_zc/plugins/zsh-autosuggestions" ]] || \
+  git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$_zc/plugins/zsh-autosuggestions"
+[[ -d "$_zc/plugins/zsh-syntax-highlighting" ]] || \
+  git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting "$_zc/plugins/zsh-syntax-highlighting"
+[[ -d "$_zc/plugins/zsh-completions" ]] || \
+  git clone --depth=1 https://github.com/zsh-users/zsh-completions "$_zc/plugins/zsh-completions"
+if [[ ! -e "$_zc/themes/powerlevel10k" && -d "$(brew --prefix)/opt/powerlevel10k/share/powerlevel10k" ]]; then
+  mkdir -p "$_zc/themes"
+  ln -sfn "$(brew --prefix)/opt/powerlevel10k/share/powerlevel10k" "$_zc/themes/powerlevel10k"
+fi
+unset _zc
+
+# Node LTS via nvm (first-run only)
+if [[ ! -s "$HOME/.nvm/alias/default" ]]; then
+  echo "==> Installing Node LTS"
+  mkdir -p "$HOME/.nvm"
+  export NVM_DIR="$HOME/.nvm"
+  . "$(brew --prefix)/opt/nvm/nvm.sh"
+  nvm install --lts
+  nvm alias default 'lts/*'
+fi
+# --- end bootstrap ---
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -97,6 +144,8 @@ export NVM_DIR="$HOME/.nvm"
 # dotnet setup (unified for SDK + tools + runtime)
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
+export DOTNET_CLI_TELEMETRY_OPTOUT="true"
+export DOTNET_MULTILEVEL_LOOKUP=0
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -125,7 +174,8 @@ export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias code='code-insiders'
+alias code='code'
+alias vim='nvim'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
