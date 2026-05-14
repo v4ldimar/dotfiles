@@ -1,6 +1,5 @@
-[user]
-	name = valdimar
-	email = valdimar@retric.is 
+[github]
+	user = v4ldimar
 [core]
 	editor = vim
 [init]
