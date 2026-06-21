@@ -1,5 +1,7 @@
 [github]
 	user = v4ldimar
+[user]
+	email = valdimarjparks@gmail.com
 [core]
 	editor = nvim
 [init]
