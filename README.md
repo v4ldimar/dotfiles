@@ -2,6 +2,13 @@
 
 Personal macOS shell setup. Setup a fresh laptop with one command.
 
+## Project structure
+
+- `config.sh` — bootstrap script; symlinks the files below into `$HOME`.
+- `.zshrc` — shell config, plus a first-run block that installs Homebrew, brew formulas, Oh My Zsh + plugins, and Node LTS.
+- `.gitconfig` — git config (editor, default branch, user).
+- `.gitignore` — global ignore rules (e.g. `.DS_Store`).
+
 ## Install
 
 ```sh
