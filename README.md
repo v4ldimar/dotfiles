@@ -10,7 +10,10 @@ git clone https://github.com/v4ldimar/dotfiles.git ~/dotfiles
 exec zsh
 ```
 
-`config.sh` symlinks `.zshrc`, `.gitconfig`, and `.gitignore` into `$HOME` (existing files are saved to `*.bak`). The first zsh launch then bootstraps everything that's missing:
+- `config.sh` symlinks `.zshrc`, `.gitconfig`, and `.gitignore` into `$HOME`.
+- Existing files are saved to `*.bak`.
+
+**The first zsh launch installs everything that's missing:**
 
 - Homebrew
 - Brew formulas: `git`, `neovim`, `nvm`, `powerlevel10k`
@@ -21,4 +24,5 @@ Subsequent shell startups are silent — each step checks if it's already instal
 
 ## Update
 
-Edit files in `~/dotfiles` directly; the symlinks pick up changes immediately. To install a new tool, add it to the brew bootstrap block in [.zshrc](.zshrc).
+- Edit files in `~/dotfiles` directly the symlinks pick up changes immediately.
+- To install a new tool, add it to the brew bootstrap block in [.zshrc](.zshrc).
