@@ -1,35 +1,25 @@
 # dotfiles
 
-Personal macOS shell setup. Setup a fresh laptop with one command.
+My personal macOS shell setup. One command, fresh laptop, working shell.
 
 ## Project structure
 
-- `config.sh` — bootstrap script; symlinks the files below into `$HOME`.
-- `.zshrc` — shell config, plus a first-run block that installs Homebrew, brew formulas, Oh My Zsh + plugins, and Node LTS.
-- `.gitconfig` — git config (editor, default branch, user).
-- `.gitignore` — global ignore rules (e.g. `.DS_Store`).
+- `config.sh`: symlinks the files below into `$HOME`.
+- `.zshrc`: shell config; installs Homebrew & packages, Oh My Zsh + plugins, and Node LTS on first run.
+- `.gitconfig`: git config global settings (editor, default branch, user).
+- `.gitignore`: git ignore global rules.
 
 ## Install
 
 ```sh
-git clone https://github.com/v4ldimar/dotfiles.git ~/dotfiles
-~/dotfiles/config.sh
-exec zsh
+git clone https://github.com/v4ldimar/dotfiles.git && cd dotfiles && exec zsh
 ```
 
-- `config.sh` symlinks `.zshrc`, `.gitconfig`, and `.gitignore` into `$HOME`.
-- Existing files are saved to `*.bak`.
+- Existing files get saved & backed up to `*.bak` first.
+- On the first zsh launch it installs whatever's missing:
+  - MacOS: `git`/`neovim`/`nvm`/`powerlevel10k`, Oh My Zsh + plugins, Node LTS.
 
-**The first zsh launch installs everything that's missing:**
+## Updating
 
-- Homebrew
-- Brew formulas: `git`, `neovim`, `nvm`, `powerlevel10k`
-- Oh My Zsh + plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-completions`)
-- Node LTS via nvm
-
-Subsequent shell startups are silent — each step checks if it's already installed.
-
-## Update
-
-- Edit files in `~/dotfiles` directly the symlinks pick up changes immediately.
-- To install a new tool, add it to the brew bootstrap block in [.zshrc](.zshrc).
+- Edit files in `~/dotfiles` directly. They are symlinked so changes apply right away.
+- To add a new tool, drop it in the install block at the top of [.zshrc](.zshrc).

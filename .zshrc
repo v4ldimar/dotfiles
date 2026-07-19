@@ -1,3 +1,5 @@
+# ===== tool install scripts =====
+
 # Homebrew
 if ! command -v brew >/dev/null 2>&1; then
   echo "==> Installing Homebrew"
@@ -43,7 +45,7 @@ if [[ ! -s "$HOME/.nvm/alias/default" ]]; then
   nvm install --lts
   nvm alias default 'lts/*'
 fi
-# --- end bootstrap ---
+# === end tool install scripts ===
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
