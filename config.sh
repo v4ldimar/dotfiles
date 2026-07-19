@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Symlink dotfiles into $HOME. The .zshrc itself bootstraps Homebrew,
 # Oh My Zsh, plugins, and nvm on first shell load.
 
 set -euo pipefail
 
-REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly FILES=(.gitconfig .gitignore .zshrc)
 
-for file in .gitconfig .gitignore .zshrc; do
+for file in "${FILES[@]}"; do
   target="$HOME/$file"
   if [[ -e "$target" && ! -L "$target" ]]; then
     mv "$target" "$target.bak"
