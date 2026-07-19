@@ -1,25 +1,34 @@
 # dotfiles
 
-My personal macOS shell setup. One command, fresh laptop, working shell.
+My personal shell setup for macOS (zsh) and Windows (Git Bash). One command, fresh machine, working shell.
 
-## Project structure
+## What's here
 
-- `config.sh`: symlinks the files below into `$HOME`.
-- `.zshrc`: shell config; installs Homebrew & packages, Oh My Zsh + plugins, and Node LTS on first run.
-- `.gitconfig`: git config global settings (editor, default branch, user).
-- `.gitignore`: git ignore global rules.
+- `install.sh` / `install.ps1`: entry point — detects the OS and runs the matching installer below.
+- `config.sh` / `config.ps1`: symlinks the files below into your home directory.
+- `.zshrc`: macOS shell config; installs Homebrew & packages, Oh My Zsh + plugins, and Node LTS on first run.
+- `.bashrc`: Windows/Git Bash shell config; installs nvm, Node LTS, and Neovim on first run.
+- `.gitconfig`: git settings (editor, default branch, user).
+- `.gitignore`: global ignore rules.
 
 ## Install
 
+Clone it wherever you like — the scripts symlink based on their own location, not where the repo lives.
+
+macOS:
+
 ```sh
-git clone https://github.com/v4ldimar/dotfiles.git && cd dotfiles && exec zsh
+git clone https://github.com/v4ldimar/dotfiles.git && cd dotfiles && ./install.sh && exec zsh
 ```
 
-- Existing files get saved & backed up to `*.bak` first.
-- On the first zsh launch it installs whatever's missing:
-  - MacOS: `git`/`neovim`/`nvm`/`powerlevel10k`, Oh My Zsh + plugins, Node LTS.
+Windows (PowerShell):
+
+```powershell
+git clone https://github.com/v4ldimar/dotfiles.git; cd dotfiles; powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+Existing files get backed up to `*.bak` first. On Windows, creating the symlinks needs Developer Mode on (Settings > Privacy & Security > For developers) or an elevated PowerShell.
 
 ## Updating
 
-- Edit files in `~/dotfiles` directly. They are symlinked so changes apply right away.
-- To add a new tool, drop it in the install block at the top of [.zshrc](.zshrc).
+Edit files in the cloned repo directly — they're symlinked, so changes apply right away. To add a new tool, drop it in the install block at the top of `.zshrc` or `.bashrc`.

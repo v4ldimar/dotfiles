@@ -1,7 +1,7 @@
 [github]
 	user = v4ldimar
-	name = "Valdimar John Parks"
 [user]
+	name = "Valdimar John Parks"
 	email = valdimarjparks@gmail.com
 [core]
 	editor = nvim
