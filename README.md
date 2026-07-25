@@ -18,7 +18,7 @@ Clone it wherever you like — the scripts symlink based on their own location, 
 macOS:
 
 ```sh
-git clone https://github.com/v4ldimar/dotfiles.git && cd dotfiles && ./install.sh && exec zsh
+git clone https://github.com/v4ldimar/dotfiles.git && cd dotfiles && bash install.sh && exec zsh
 ```
 
 Windows (PowerShell):
