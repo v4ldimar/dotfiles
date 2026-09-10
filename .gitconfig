@@ -7,5 +7,7 @@
 	editor = nvim
 [init]
 	defaultBranch = main
+[merge]
+	conflictstyle = zdiff3
 [push]
 	autoSetupRemote = true
