@@ -7,8 +7,6 @@
 	editor = nvim
 [init]
 	defaultBranch = main
-[pull]
-	rebase = false
 [merge]
 	conflictstyle = zdiff3
 [push]
