@@ -5,9 +5,32 @@
 	email = valdimarjparks@gmail.com
 [core]
 	editor = nvim
+	# autocrlf = input
 [init]
 	defaultBranch = main
+[pull]
+	rebase = false
+	ff = only
 [merge]
-	conflictstyle = zdiff3
+    conflictStyle = zdiff3
+    renames = true
+    renormalize = true
+    ff = no
+    commit = no
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+    missingCommitsCheck = warn
+[rerere]
+    enabled = true
+    autoUpdate = true
 [push]
 	autoSetupRemote = true
+	default = current
+[fetch]
+	prune = true
+[diff]
+	algorithm = histogram
+	colorMoved = zebra
+	renames = true
