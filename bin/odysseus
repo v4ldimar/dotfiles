@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Description: Forward the odysseus command to the scripts repository.
+set -euo pipefail
+
+launcher="$HOME/scripts/odysseus/odysseus.sh"
+[[ -f "$launcher" ]] || { printf 'Odysseus launcher not found: %s\n' "$launcher" >&2; exit 1; }
+exec bash "$launcher" "$@"

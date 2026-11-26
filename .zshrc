@@ -149,6 +149,9 @@ export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export DOTNET_MULTILEVEL_LOOKUP=0
 
+# Resolve the symlink so commands work wherever this dotfiles repo is cloned.
+export PATH="${${(%):-%x}:A:h}/bin:$PATH"
+
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 

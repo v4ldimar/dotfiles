@@ -4,7 +4,8 @@
 
 set -euo pipefail
 
-readonly REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly REPO
 readonly FILES=(.gitconfig .gitignore .zshrc)
 
 for file in "${FILES[@]}"; do

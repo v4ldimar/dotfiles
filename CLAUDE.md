@@ -10,7 +10,7 @@ Personal shell dotfiles for macOS (zsh) and Windows (Git Bash). Goal: set up a f
 
 - Install (macOS): `./install.sh`, then `exec zsh`.
 - Install (Windows): `./install.ps1` from PowerShell.
-- No build, lint, test, or CI tooling exists in this repo (no Makefile, package.json, or .github/workflows) — don't go looking for one.
+- Shell lint: `shellcheck -s bash config.sh bin/odysseus`. No build or CI tooling exists.
 
 ## Architecture
 
@@ -18,7 +18,7 @@ Personal shell dotfiles for macOS (zsh) and Windows (Git Bash). Goal: set up a f
 
 Each platform's setup is split across two stages, symlink installer + shell-config bootstrap:
 
-- **macOS**: **`config.sh`** only symlinks three static files (`.gitconfig`, `.gitignore`, `.zshrc`) from the repo into `$HOME`, backing up any pre-existing real file to `<file>.bak` first. It does not install any tools itself. **`.zshrc`** contains a first-run bootstrap block (top of the file) that installs everything else: Homebrew, brew formulas (`git`, `neovim`, `nvm`, `powerlevel10k`), Oh My Zsh + plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-completions`), and Node LTS via nvm.
+- **macOS**: **`config.sh`** only symlinks three static files (`.gitconfig`, `.gitignore`, `.zshrc`) from the repo into `$HOME`, backing up any pre-existing real file to `<file>.bak` first. It does not install any tools itself. **`.zshrc`** contains a first-run bootstrap block (top of the file) that installs everything else: Homebrew, brew formulas (`git`, `neovim`, `nvm`, `powerlevel10k`), Oh My Zsh + plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-completions`), and Node LTS via nvm. It also adds this repo's `bin` directory to PATH; `bin/odysseus` forwards to `~/scripts/odysseus/odysseus.sh`, where AI setup, model selection and tests now live.
 - **Windows**: **`config.ps1`** is the PowerShell equivalent of `config.sh` — symlinks `.gitconfig`, `.gitignore`, `.bashrc` into `$HOME` (via `New-Item -ItemType SymbolicLink`, which needs Developer Mode on or an elevated shell), backing up any pre-existing real file the same way. **`.bashrc`** is the Windows equivalent of `.zshrc` — its first-run bootstrap block installs nvm (git-cloned into `~/.nvm`), Node LTS via nvm, and Neovim via winget, plus the shared aliases. There's no Oh My Zsh/powerlevel10k equivalent on Windows — it's intentionally scoped down to git config, nvm, Neovim, and aliases.
 
 Both bootstrap blocks run on every new shell but are idempotent — each step checks whether it's already installed before acting, so they're silent after the first run.
